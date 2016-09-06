@@ -1,0 +1,29 @@
+<html>
+    <body>
+      <h1> Shorten a URL:  </h1>
+      <form class="form-horizontal" id="url_submit_form" method="POST" action="/">
+          {% csrf_token %}
+          <div class="span5">
+              <input type="text" name="url"
+              placeholder="Enter a long URL"
+              value="{% if url %}{{ url }}{% endif %}"
+              id="url_input"
+              class="span5">
+
+              {% if error %}
+                <span class="help-inline"> Please enter a valid URL </span>
+                {% endif %}
+          </div>        
+          <div class="span2">
+              <button type="submit" class="btn btn-success">Submit</button>
+          </div>
+
+      </form>
+
+      {% if shorturl %}
+          <h2>Success!</h2>
+          <p>Shortened URL: <a href="{{ shorturl }}">{{ shorturl }}</a></p>
+          <p>View statistics: <a href="{{ shorturl }}/stats">{{ shorturl }}/stats</a></p>
+      {% endif %}
+    </body>
+</html>
